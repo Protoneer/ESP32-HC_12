@@ -11,10 +11,17 @@
 - __HC-12__ https://www.allaboutcircuits.com/projects/understanding-and-implementing-the-hc-12-wireless-transceiver-module/
 
 ## Wiring 
+### HC-12 long range 433hz UART tranciever
 - ESP32 Pin 6 = radio rx
 - ESP32 Pin 7 = radio tx
 - ESP32 Pin 8 = Radio Set
 - ESP32 Gnd = Radio GND
 - ESP32 3V3 = Radio VCC
+### I2C 
+- ESP32 Pin22 - SCL 
+- ESP32 Pin21 - SDA
+
+
+
 
 
