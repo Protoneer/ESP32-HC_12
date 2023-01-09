@@ -1,9 +1,10 @@
 # ESP32-HC_12
 
 ## Folder Structure
+- __odoo/addons/*__ - Odoo Addons that collects the data
 - __reciever__ - Receives sensor data and log to Odoo database
 - __sensor/*__ - Sensor Nodes that transmit data
-- __odoo/addons/*__ - Odoo Addons that collects the data
+
 
 ## Hardware
 - __M5 Stamp C3__ doco - https://docs.m5stack.com/en/core/stamp_c3
