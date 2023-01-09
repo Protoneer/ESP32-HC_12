@@ -1,7 +1,7 @@
 # ESP32-HC_12
 
 ## Hardware
-- __M5 Stamp C3 doco__ - https://docs.m5stack.com/en/core/stamp_c3
+- __M5 Stamp C3__ doco - https://docs.m5stack.com/en/core/stamp_c3
 - __HC-12__ https://www.allaboutcircuits.com/projects/understanding-and-implementing-the-hc-12-wireless-transceiver-module/
 
 ## Wiring 
