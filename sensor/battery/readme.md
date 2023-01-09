@@ -1,0 +1,2 @@
+- Reads ADC value - Using a voltage devider connected to ADC pin.
+- Sends value via UART connected to HC-12
