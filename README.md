@@ -1,6 +1,7 @@
 # ESP32-HC_12
 
 ## Folder Structure
+- __hardware__ - Files related to boards designed for the code
 - __odoo/addons/*__ - Odoo Addons that collects the data
 - __reciever__ - Receives sensor data and log to Odoo database
 - __sensor/*__ - Sensor Nodes that transmit data
