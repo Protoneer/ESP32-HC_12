@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <!-- Views -->
+    <record id="event_tree_view" model="ir.ui.view">
+        <field name="name">event_tree_view</field>
+        <field name="model">iot.event</field>
+        <field name= "priority">20</field>
+        <field name="arch" type="xml">
+          <tree string="Events" default_order="create_date desc" create="true" multi_edit='1'>              
+              <field name="create_date" />
+              <field name="device_id" />
+              <field name="data" />
+          </tree>
+        </field>
+    </record>
+
+
+    <!-- Search / Group / Events -->
+    <!-- <record id="event_search" model="ir.ui.view">
+        <field name="name">event_search</field>
+        <field name="model">event</field>
+        <field name= "priority">20</field>
+        <field name="arch" type="xml">
+            <search string="Search Event">
+              <field name="create_date" />
+              <field name="device_id" />
+                <group expand="0" string="Group By">
+                  <filter string="Device" name="device_id" domain="[]" context="{'group_by': 'device_id'}"/>
+                  <filter string="Create Date" name="create_date" domain="[]" context="{'group_by': 'create_date'}"/>
+                </group>
+            </search>
+         </field>
+    </record>  -->
+
+
+    <record id="event_form_view" model="ir.ui.view">
+        <field name="name">Event</field>
+        <field name="model">iot.event</field>
+        <field name= "priority">20</field>
+        <field name="arch" type="xml">
+          <form name="Event" string="Event" default_order="create_date" create="true">              
+            <sheet>                
+                <group>
+                  <field name="device_id" />
+                  <field name="create_date" />
+                  <field name="active" />
+                  <field name="data" />
+                </group>
+            </sheet>
+          </form>
+        </field>
+    </record>
+
+
+    <record id="device_tree_view" model="ir.ui.view">
+        <field name="name">device_tree_view</field>
+        <field name="model">iot.device</field>
+        <field name= "priority">20</field>
+        <field name="arch" type="xml">
+          <tree string="Devices" default_order="create_date desc" create="true" multi_edit='1'>              
+                <field name="name" />
+                <field name="active" />
+          </tree>
+        </field>
+    </record>
+
+
+    <record id="device_form_view" model="ir.ui.view">
+        <field name="name">device_form_view</field>
+        <field name="model">iot.device</field>
+        <field name= "priority">20</field>
+        <field name="arch" type="xml">
+          <form name="Event" string="Device" default_order="name" create="true">              
+            <sheet>                
+                <group>
+                  <field name="name" />
+                  <field name="active" />
+                </group>
+            </sheet>
+          </form>
+        </field>
+    </record>
+
+
+
+    <!-- Actions  -->
+
+    <!-- <record model="ir.actions.act_window" id="event_action">
+      <field name="name">Events</field>
+      <field name="res_model">event</field>
+      <field name="view_id" ref="event_tree_view"/>
+      <field name="context">{'group_by':'create_date:day'}</field>      
+    </record>
+    <record model="ir.actions.act_window" id="event_type_action">
+      <field name="name">Event Types</field>
+      <field name="res_model">event.type</field>
+      <field name="view_id" ref="event_type_tree_view"/>
+    </record>
+    <record model="ir.actions.act_window" id="event_location_action">
+      <field name="name">Event Locations</field>
+      <field name="res_model">event.location</field>
+      <field name="view_id" ref="event_location_tree_view"/>
+    </record>
+    <record model="ir.actions.act_window" id="event_device_action">
+      <field name="name">Devices</field>
+      <field name="res_model">event.device</field>
+      <field name="view_id" ref="event_device_tree_view"/>
+    </record> -->
+
+    <!-- Menus -->
+    <!-- <menuitem name="Factory" id="event_main_menu" parent="mrp.menu_mrp_root" sequence="23" />
+    <menuitem name="Events" id="events_menu" parent="event_main_menu" sequence="20" action="event_action" />
+    <menuitem name="Settings" id="event_setting_menu" parent="event_main_menu" sequence="100" />
+    <menuitem name="Event - Devices" id="event_devices_menu" parent="event_setting_menu" sequence="25" action="event_device_action" />
+    <menuitem name="Event - Types" id="event_types_menu" parent="event_setting_menu" sequence="30" action="event_type_action" />
+    <menuitem name="Event - Locations" id="event_locations_menu" parent="event_setting_menu" sequence="35" action="event_location_action" /> -->
+
+
+</odoo>
