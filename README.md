@@ -18,14 +18,9 @@
 - ESP32 Pin 8 = Radio Set
 - ESP32 Gnd = Radio GND
 - ESP32 3V3 = Radio VCC
-### I2C 
-- ESP32 Pin22 - SCL 
-- ESP32 Pin21 - SDA
-
 ### ADC
 - ESP32 Pin 5 = 18v Battery positive side (Voltage devider)
 
-
-
-
-
+### I2C - (WIP)
+- ESP32 Pin22 - SCL 
+- ESP32 Pin21 - SDA
