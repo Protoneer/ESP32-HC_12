@@ -22,6 +22,9 @@
 - ESP32 Pin22 - SCL 
 - ESP32 Pin21 - SDA
 
+### ADC
+- ESP32 Pin 5 = 18v Battery positive side (Voltage devider)
+
 
 
 
