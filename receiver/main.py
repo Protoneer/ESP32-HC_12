@@ -28,12 +28,12 @@ def updateODOO(data):
   import random
   import json
   import urequests as requests
+  import secrets as secrets
  
-  HOST = '????' # Needs to be IP
-  #PORT = ????
-  DB = '????'
-  USER = '????'
-  PASS = '????'
+  HOST = secrets['HOST']
+  DB   = secrets['DB']
+  USER = secrets['USER']
+  PASS = secrets['PASS']
  
   def json_rpc(url, method, params):
       data = {
