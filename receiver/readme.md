@@ -8,8 +8,10 @@
 Needs a secrets.py file with the credentail to the Odoo API host:
 
 secrets = {
-  'HOST' : '<host>',
-  'DB'   : '<db>',
-  'USER' : '<user>',
-  'PASS' : '<pass>'  
+  'odoo_host' : 'www.odoo.com', # Needs to be IP
+  'odoo_db'   : 'odoo',
+  'odoo_user' : 'odoo',
+  'odoo_password' : 'odoo',
+  'ssid' : 'wifi',
+  'ssid_password' : 'password'
 }
