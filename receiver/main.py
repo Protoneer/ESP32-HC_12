@@ -4,8 +4,15 @@ import time
 from machine import Pin
 from machine import WDT
 
+import random
+import json
+import urequests as requests
+from secrets import secrets
+
+
+
 #Watch Dog time out after 30 seconds
-wdt = WDT(timeout=30000) 
+wdt = WDT(timeout=300000) 
 
 p0 = Pin(8, mode=Pin.OUT , pull = Pin.PULL_UP,value=1)
 print("Set device to AT mode\r\n")
@@ -25,15 +32,11 @@ uart.read()
 
 
 def updateODOO(data):
-  import random
-  import json
-  import urequests as requests
-  import secrets as secrets
+  HOST = secrets['odoo_host']
+  DB   = secrets['odoo_db']
+  USER = secrets['odoo_user']
+  PASS = secrets['odoo_password']
  
-  HOST = secrets['HOST']
-  DB   = secrets['DB']
-  USER = secrets['USER']
-  PASS = secrets['PASS']
  
   def json_rpc(url, method, params):
       data = {
@@ -68,7 +71,7 @@ def do_connect():
     if not sta_if.isconnected():
         print('connecting to network...')
         sta_if.active(True)
-        sta_if.connect('Flux', 'Test1234')
+        sta_if.connect(secrets['ssid'], secrets['ssid_password'])
         while not sta_if.isconnected():
             pass
     print('network config:', sta_if.ifconfig())
@@ -96,6 +99,3 @@ while True:
         np[0] = (0, 0, 0) 
         np.write()
     wdt.feed()
-
-
-
