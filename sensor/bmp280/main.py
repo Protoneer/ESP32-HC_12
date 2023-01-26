@@ -2,7 +2,7 @@ from machine import SoftI2C , Pin
 from bmp280 import *
 
 bus = SoftI2C(scl=Pin(22), sda=Pin(21) )
-print(bus.scan())
+#print(bus.scan())
 bmp = BMP280(bus)
 
 bmp.use_case(BMP280_CASE_WEATHER)
@@ -16,22 +16,12 @@ bmp.iir = BMP280_IIR_FILTER_2
 
 bmp.spi3w = BMP280_SPI3W_ON
 
-bmp.power_mode = BMP280_POWER_FORCED
-# or 
-bmp.force_measure()
-
+#bmp.power_mode = BMP280_POWER_FORCED
 bmp.power_mode = BMP280_POWER_NORMAL
-# or 
-#bmp.normal_measure()
-# also
-#bmp.in_normal_mode()
-
 #bmp.power_mode = BMP280_POWER_SLEEP
-# or 
-bmp.sleep()
 
 print(bmp.temperature)
-print(bmp.pressure)
+print(int(round(bmp.pressure / 100 , 0)))
 
 #True while measuring
 bmp.is_measuring
