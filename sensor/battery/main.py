@@ -9,7 +9,7 @@ transmit_interval = 10
 
 ## LED
 np = neopixel.NeoPixel(machine.Pin(2), 1)
-np[0] = (0, 5, 0) 
+np[0] = (0, 0, 0) 
 np.write()
 
 
@@ -82,9 +82,6 @@ time.sleep(0.1)
 
 
 
-np[0] = (0, 0, 0) 
-np.write()
-time.sleep(1)
 
 
 
@@ -106,8 +103,16 @@ def read_voltage():
 
 if deep_sleep_mode:
     print(radio_wake(radio_set_pin,radio_uart))
+    np[0] = (0, 5, 0) 
+    np.write()
+    
     radio_uart.write(read_voltage())
-    print(radio_sleep(radio_set_pin,radio_uart))
+    time.sleep(0.5)
+
+    np[0] = (0, 0, 0) 
+    np.write()
+
+    print(radio_sleep(radio_set_pin,radio_uart))    
     machine.deepsleep(transmit_interval * 1000)
 else:
     while True:
