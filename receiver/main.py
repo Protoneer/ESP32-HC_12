@@ -15,7 +15,11 @@ from secrets import secrets
 wdt = WDT(timeout=300000) 
 
 p0 = Pin(8, mode=Pin.OUT , pull = Pin.PULL_UP,value=1)
-print("Set device to AT mode\r\n")
+print("Set device to AT mode incase in sleep mode\r\n")
+p0.off()
+time.sleep(0.1)
+
+print("Exit AT mode\r\n")
 p0.on()
 time.sleep(0.1)
 
