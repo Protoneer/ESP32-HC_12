@@ -95,11 +95,13 @@ while True:
         time.sleep(0.1)        
 
         #updateODOO()
-        updateODOO({
-              'device_id':1,
-              'data':str(uart.read())
-          })
-       
+        try:
+            updateODOO({
+                  'device_id':1,
+                  'data':str(uart.read())
+              })
+        except:
+            print("Connection error")
         np[0] = (0, 0, 0) 
         np.write()
     wdt.feed()
