@@ -4,6 +4,14 @@
 
 # 9 DHT
 
+# Battery Voltage pin... ??? P5???
+
+import message_format
+
+
+
+
+
 
 
 
@@ -106,31 +114,55 @@ def read_voltage():
     print(str(voltage) + 'V : ' + str(adc_value) )
     return str(voltage) + 'V : ' + str(adc_value)
 
+def read_DHT():
+    d.measure()
+    temp = d.temperature()
+    humid = d.humidity()
+    print(str(temp)+'C')
+    print(str(humid)+'%')
+    
+    msg = message_format.encode_message({
+        'to_adr': 1,
+        'from_adr': 2,
+        'function': 1,
+        'body': str(temp) + 'C,' + str(humid) + '%',
+     })
+
+    return msg
+
+
 
 toggle = True
-led = Pin(15, mode=Pin.OUT ,value=1)
+led = Pin(15, mode=Pin.OUT ,value=0)
 
 if deep_sleep_mode:
+    led.value(1)
     print(radio_wake(radio_set_pin,radio_uart))
     
-    radio_uart.write(read_voltage())
+    msg = read_DHT()
+    radio_uart.write(msg)
+    #radio_uart.write(read_voltage())
     time.sleep(0.5)
 
-    print(radio_sleep(radio_set_pin,radio_uart))    
+    print(radio_sleep(radio_set_pin,radio_uart))
+    led.value(0)
     machine.deepsleep(transmit_interval * 1000)
 else:
     while True:
+        led.value(1)
         print("Send")
         #radio_uart.write(read_voltage())
         
-        d.measure()
-        temp = d.temperature()
-        humid = d.humidity()
-        print(str(temp)+'C')
-        print(str(humid)+'%')
+        try:
+            msg = read_DHT()          
+            
+            
+            radio_uart.write(msg)
+        except:
+            print("Error")
+            radio_uart.write("Error")
 
-        radio_uart.write(str(temp) + 'C,' + str(humid) + '%')
-        time.sleep(transmit_interval)
-        toggle = not toggle
-        led.value(toggle)
+        led.value(0)
+        time.sleep(transmit_interval)        
+        
         
