@@ -12,6 +12,7 @@
               <field name="create_date" />
               <field name="device_id" />
               <field name="data" />
+              <field name="data_binary" optional='hide' />
           </tree>
         </field>
     </record>
