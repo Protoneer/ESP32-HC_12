@@ -6,7 +6,7 @@ class measurement(models.Model):
     _description = 'Measurement'
 
     device_id = fields.Many2one(comodel_name='iot.device', string='Device' , required = "1")
-    type = fields.Many2one(comodel_name='iot.measurement_type', string='Device' , required = "1")
+    type = fields.Many2one(comodel_name='iot.measurement_type', string='Type' , required = "1")
 
     value_char = fields.Char()
     value_number = fields.Float()
