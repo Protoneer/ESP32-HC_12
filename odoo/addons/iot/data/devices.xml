@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- noupdate set to 1 to prevent serial number value from xml file to override existing value -->
+<odoo noupdate="0">
+
+    <!-- Devices -->
+    <record id="device1" model="iot.device">
+        <field name="name">433Mhz</field>
+        <field name="active">True</field>
+        <field name="device_id">1</field>
+        
+    </record>
+    <record id="device2" model="iot.device">
+        <field name="name">Device 2</field>
+        <field name="active">True</field>
+        <field name="device_id">2</field>
+    </record>
+
+    <!-- Measurement Types -->
+    <record id="temp" model="iot.measurement_type">
+        <field name="name">Temperature - C</field>
+    </record>
+    <record id="humidity" model="iot.measurement_type">
+        <field name="name">Humidity - %</field>
+    </record>
+
+
+
+</odoo>

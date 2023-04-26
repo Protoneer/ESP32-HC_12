@@ -7,3 +7,4 @@ class pertronic_event_device(models.Model):
 
     active = fields.Boolean(default=True)
     name = fields.Char("Name")
+    device_id = fields.Integer()

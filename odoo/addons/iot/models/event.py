@@ -8,3 +8,5 @@ class iot_event(models.Model):
     active = fields.Boolean(default=True)
     device_id = fields.Many2one(comodel_name='iot.device', string='Device' , required = "1")
     data = fields.Text("Data" , help='Data associated with the event')
+    data_binary = fields.Binary(attachment=False)
+    processed = fields.Boolean(default=False)

@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_event,access_event,model_iot_event,base.group_user,1,1,1,1
 access_device,access_device,model_iot_device,base.group_user,1,1,1,1
+access_measurement,access_measurement,model_iot_measurement,base.group_user,1,1,1,1
+access_measurement_type,access_measurement_type,model_iot_measurement_type,base.group_user,1,1,1,1

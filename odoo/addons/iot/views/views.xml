@@ -12,28 +12,10 @@
               <field name="create_date" />
               <field name="device_id" />
               <field name="data" />
+              <field name="data_binary" optional='hide' />
           </tree>
         </field>
     </record>
-
-
-    <!-- Search / Group / Events -->
-    <!-- <record id="event_search" model="ir.ui.view">
-        <field name="name">event_search</field>
-        <field name="model">event</field>
-        <field name= "priority">20</field>
-        <field name="arch" type="xml">
-            <search string="Search Event">
-              <field name="create_date" />
-              <field name="device_id" />
-                <group expand="0" string="Group By">
-                  <filter string="Device" name="device_id" domain="[]" context="{'group_by': 'device_id'}"/>
-                  <filter string="Create Date" name="create_date" domain="[]" context="{'group_by': 'create_date'}"/>
-                </group>
-            </search>
-         </field>
-    </record>  -->
-
 
     <record id="event_form_view" model="ir.ui.view">
         <field name="name">Event</field>
@@ -60,13 +42,13 @@
         <field name= "priority">20</field>
         <field name="arch" type="xml">
           <tree string="Devices" default_order="create_date desc" create="true" multi_edit='1'>              
+                <field name="device_id" />
                 <field name="name" />
                 <field name="active" />
           </tree>
         </field>
     </record>
-
-
+  
     <record id="device_form_view" model="ir.ui.view">
         <field name="name">device_form_view</field>
         <field name="model">iot.device</field>
@@ -83,16 +65,82 @@
         </field>
     </record>
 
+    <record id="measurement_type_tree_view" model="ir.ui.view">
+        <field name="name">measurement_type_tree_view</field>
+        <field name="model">iot.measurement_type</field>
+        <field name= "priority">20</field>
+        <field name="arch" type="xml">
+          <tree string="Measurement Types" create="true" multi_edit='1'>              
+                <field name="id" optional="hide" />
+                <field name="name" />
+          </tree>
+        </field>
+    </record>
 
+    <record id="measurement_tree_view" model="ir.ui.view">
+        <field name="name">measurement_tree_view</field>
+        <field name="model">iot.measurement</field>
+        <field name= "priority">20</field>
+        <field name="arch" type="xml">
+          <tree string="Measurements" default_order="create_date desc" create="true" multi_edit='1'>              
+              <field name="create_date" />
+              <field name="device_id" />
+              <field name="value_char" />
+              <field name="value_number" />
+          </tree>
+        </field>
+    </record>
+
+
+
+
+
+    <!-- Search / Group / Events -->
+    <!-- <record id="event_search" model="ir.ui.view">
+        <field name="name">event_search</field>
+        <field name="model">event</field>
+        <field name= "priority">20</field>
+        <field name="arch" type="xml">
+            <search string="Search Event">
+              <field name="create_date" />
+              <field name="device_id" />
+                <group expand="0" string="Group By">
+                  <filter string="Device" name="device_id" domain="[]" context="{'group_by': 'device_id'}"/>
+                  <filter string="Create Date" name="create_date" domain="[]" context="{'group_by': 'create_date'}"/>
+                </group>
+            </search>
+         </field>
+    </record>  -->
 
     <!-- Actions  -->
-
-    <!-- <record model="ir.actions.act_window" id="event_action">
+    <record model="ir.actions.act_window" id="event_action">
       <field name="name">Events</field>
-      <field name="res_model">event</field>
+      <field name="res_model">iot.event</field>
       <field name="view_id" ref="event_tree_view"/>
       <field name="context">{'group_by':'create_date:day'}</field>      
-    </record>
+    </record>    
+    <record model="ir.actions.act_window" id="device_action">
+      <field name="name">Devices</field>
+      <field name="res_model">iot.device</field>
+      <field name="view_id" ref="device_tree_view"/>
+    </record> 
+    <record model="ir.actions.act_window" id="measurement_types_action">
+      <field name="name">Measurement Types</field>
+      <field name="res_model">iot.measurement_type</field>
+      <field name="view_id" ref="measurement_type_tree_view"/>
+    </record> 
+    <record model="ir.actions.act_window" id="measurement_action">
+      <field name="name">Measurements</field>
+      <field name="res_model">iot.measurement</field>
+      <field name="view_id" ref="measurement_tree_view"/>
+      <field name="context">{'group_by':'create_date:day'}</field>      
+    </record>    
+
+
+
+
+
+    <!-- 
     <record model="ir.actions.act_window" id="event_type_action">
       <field name="name">Event Types</field>
       <field name="res_model">event.type</field>
@@ -102,20 +150,29 @@
       <field name="name">Event Locations</field>
       <field name="res_model">event.location</field>
       <field name="view_id" ref="event_location_tree_view"/>
-    </record>
-    <record model="ir.actions.act_window" id="event_device_action">
-      <field name="name">Devices</field>
-      <field name="res_model">event.device</field>
-      <field name="view_id" ref="event_device_tree_view"/>
-    </record> -->
+    </record>-->
+
 
     <!-- Menus -->
-    <!-- <menuitem name="Factory" id="event_main_menu" parent="mrp.menu_mrp_root" sequence="23" />
+    <menuitem name="Environment" id="main_menu" sequence="1" />
+    <menuitem name="Overview" id="overview" parent="main_menu" sequence="5" action="event_action" />
+
+    <menuitem name="Data" id="data_menu" parent="main_menu" sequence="50" />
+
+    <menuitem name="Measurements" id="measurements" parent="data_menu" sequence="20" action="measurement_action" />
+    <menuitem name="Events" id="events" parent="data_menu" sequence="30" action="event_action" />
+
+    <menuitem name="Settings" id="setting_menu" parent="main_menu" sequence="100" />
+    <menuitem name="Devices" id="devices_menu" parent="setting_menu" sequence="25" action="device_action" />    
+    <menuitem name="Measurement Types" id="measurement_types_menu" parent="setting_menu" sequence="25" action="measurement_types_action" />    
+
+
+    <!--
     <menuitem name="Events" id="events_menu" parent="event_main_menu" sequence="20" action="event_action" />
-    <menuitem name="Settings" id="event_setting_menu" parent="event_main_menu" sequence="100" />
     <menuitem name="Event - Devices" id="event_devices_menu" parent="event_setting_menu" sequence="25" action="event_device_action" />
     <menuitem name="Event - Types" id="event_types_menu" parent="event_setting_menu" sequence="30" action="event_type_action" />
     <menuitem name="Event - Locations" id="event_locations_menu" parent="event_setting_menu" sequence="35" action="event_location_action" /> -->
 
 
 </odoo>
+
