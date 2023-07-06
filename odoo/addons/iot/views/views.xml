@@ -87,6 +87,7 @@
               <field name="device_id" />
               <field name="value_char" />
               <field name="value_number" />
+              <field name="type" />
           </tree>
         </field>
     </record>
