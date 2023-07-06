@@ -9,7 +9,55 @@
         <field name="trigger">on_create</field>
         <field name="active" eval="True"/>
         <field name="code">            
-env['iot.measurement'].process_event(record)
+#env['iot.measurement'].process_event(record)
+
+items = [record]
+if items[0].data_binary[0] == 1:
+  #b'\x01\x04\x01\x05\x0b14.2C,62.6%\xc2\xa3\x04'
+  #log(int(items[0].data_binary[0]),level='info')
+  #log(int(items[0].data_binary[1]),level='info')
+  #log(int(items[0].data_binary[2]),level='info')
+  #log(int(items[0].data_binary[3]),level='info')
+  
+  len = int(items[0].data_binary[4])
+  
+  #log(int(items[0].data_binary[4]),level='info')
+  
+  #data
+  data = ''
+  for item in items[0].data_binary[5:5+len]:
+    data = data + chr(item)
+  
+  
+  #log(data,level='info')
+  
+  data_split = data.split(',')
+  #log(data_split[0],level='info') # Temp
+  #log(data_split[1],level='info') # Humid
+  
+  
+  
+  #log(int(items[0].data_binary[5+len]),level='info')
+  #log(int(items[0].data_binary[6+len]),level='info')
+  #log(int(items[0].data_binary[7+len]),level='info')
+  
+  env['iot.measurement'].create({
+    'create_date' : items[0].create_date,
+    'device_id': int(items[0].data_binary[1]),
+    'type' : 1,
+    'value_char' : data_split[0],
+    "value_number" :  float(data_split[0].replace('C',''))
+  })
+  
+  env['iot.measurement'].create({
+    'create_date' : items[0].create_date,
+    'device_id': int(items[0].data_binary[1]),
+    'type' : 2,
+    'value_char' : data_split[1],
+    "value_number" :  float(data_split[1].replace('%',''))
+  })
+
+
         </field>
     </record>
 

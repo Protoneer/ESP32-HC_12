@@ -91,6 +91,17 @@
         </field>
     </record>
 
+    <record id="measurement_graph_view" model="ir.ui.view">
+        <field name="name">measurement_graph_view</field>
+        <field name="model">iot.measurement</field>
+        <field name= "priority">20</field>
+        <field name="arch" type="xml">
+            <graph string="Measurment Graph" type="line" sample="1" disable_linking="1">
+                <field name="create_date" interval="minute" type="col"/>
+                <field name="value_number" type="measure"/>
+            </graph>
+        </field>
+    </record>
 
 
 
@@ -132,6 +143,7 @@
     <record model="ir.actions.act_window" id="measurement_action">
       <field name="name">Measurements</field>
       <field name="res_model">iot.measurement</field>
+      <field name="view_mode">tree,graph</field>
       <field name="view_id" ref="measurement_tree_view"/>
       <field name="context">{'group_by':'create_date:day'}</field>      
     </record>    

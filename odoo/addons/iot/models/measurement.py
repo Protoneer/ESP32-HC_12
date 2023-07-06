@@ -6,7 +6,7 @@ class measurement(models.Model):
     _description = 'Measurement'
 
     device_id = fields.Many2one(comodel_name='iot.device', string='Device' , required = "1")
-    type = fields.Many2one(comodel_name='iot.measurement_type', string='Device' , required = "1")
+    type = fields.Many2one(comodel_name='iot.measurement_type', string='Device Type' , required = "1")
 
     value_char = fields.Char()
     value_number = fields.Float()
@@ -33,13 +33,15 @@ class measurement(models.Model):
             self.env['iot.measurement'].create({
                 "device_id" : 4,
                 "type" : 1,
-                "value_number" : decoded['body'].split(',')[0]
+                "value_char" : decoded['body'].split(',')[0],
+                "value_number" : float(decoded['body'].split(',')[0].replace('C',''))
             })
 
             self.env['iot.measurement'].create({
                 "device_id" : 4,
                 "type" : 2,
-                "value_number" : decoded['body'].split(',')[2]
+                "value_char" : decoded['body'].split(',')[2],
+                "value_number" : float(decoded['body'].split(',')[2].replace('%',''))
             })
 
 
